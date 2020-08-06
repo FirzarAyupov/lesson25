@@ -1,8 +1,6 @@
 package ru.ayupov.task1;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * public boolean isUnique(Map<String, String> map); *
@@ -31,17 +29,25 @@ public class Main {
         System.out.println(isUnique(map));
         System.out.println(isUnique(map2));
 
+        System.out.println(isUniqueSet(map));
+        System.out.println(isUniqueSet(map2));
+
     }
 
     public static boolean isUnique(Map<String, String> map) {
-        String oldS = "";
         for (String s : map.values()) {
-            if (s.equals(oldS)) {
+            if (Collections.frequency(map.values(), s) > 1 ) {
                 return false;
             }
-            oldS = s;
         }
         return true;
+    }
+
+    public static boolean isUniqueSet(Map<String, String> map){
+        Collection<String> valuesWithDuplicate = map.values();
+        Set<String> nonDuplicateValues = new HashSet<>(valuesWithDuplicate);
+        return nonDuplicateValues.size() == map.values().size();
+
     }
 
 }
